@@ -17,9 +17,8 @@ Sovelluksen ominaisuuksia:
 Sovelluksen ominaisuudet ovat suoraan kurssin esimerkistä. Muutin sen verran, että käyttäjä ei voi poistaa koko viestiketjua, sillä silloin poistuisivat myös muiden keskustelut aiheesta. Oman viestin poistamista mietin vielä eli olisiko parempi olla niin, että vain ylläpitäjä voi poistaa viestiketjuja sekä yksittäisiä viestejä.
 
 Keskustelualueiden aiheita:
-
--Yleinen
--Suomalainen musiikki
--Ulkomaalainen musiikki
--Keikat
--In english
+- Yleinen
+- Suomalainen musiikki
+- Ulkomaalainen musiikki
+- Keikat
+- In English
