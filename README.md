@@ -13,7 +13,8 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi etsiä kaikki viestit, joiden osana on annettu sana. 
 - Ylläpitäjä voi poistaa viestiketjun sekä yksittäisiä viestejä.
 - Ylläpitäjä voi lisätä ja poistaa keskustelualueita. 
-- Ylläpitäjä voi luoda salaisen alueen ja määrittää, keillä käyttäjillä on pääsy alueelle. 
+- Ylläpitäjä voi luoda salaisen alueen ja määrittää, keillä käyttäjillä on pääsy alueelle.
+ 
 Sovelluksen ominaisuudet ovat suoraan kurssin esimerkistä. Muutin sen verran, että käyttäjä ei voi poistaa koko viestiketjua, sillä silloin poistuisivat myös muiden keskustelut aiheesta. Oman viestin poistamista mietin vielä eli olisiko parempi olla niin, että vain ylläpitäjä voi poistaa viestiketjuja sekä yksittäisiä viestejä.
 
 Keskustelualueiden aiheita:
