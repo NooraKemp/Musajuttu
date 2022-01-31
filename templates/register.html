@@ -1,4 +1,6 @@
-<from action="/register" method="post">
+{% block content %}
+
+<form action="/register" method="post">
 Käyttäjätunnus: <input type="text" name="username">
 <p>
 Salasana: <input type="password" name="password1">
@@ -8,3 +10,7 @@ Salasana uudestaan: <input type="password" name="password2">
 <input type="hidden" name="role" value="1">
 <input type="submit" value="Rekisteröidy">
 </form>
+<p>
+<a href="/login">Kirjaudu sisään</a>
+
+{% endblock %}
