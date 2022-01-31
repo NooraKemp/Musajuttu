@@ -1,0 +1,13 @@
+{% block content %}
+
+<h1>MUSAJUTTU</h1>
+
+{% if session.user_id %}
+Kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+<a href="/register">Rekisteröidy</a>
+{% endif %}
+<p>
+
+{% endblock %}
