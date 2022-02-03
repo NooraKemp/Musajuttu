@@ -6,7 +6,7 @@ import users
 def index():
     return render_template("index.html")
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["get", "post"])
 def login():
     if request.method == "GET":
         return render_template("login.html")
@@ -22,7 +22,7 @@ def logout():
     users.logout()
     return redirect("/")
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["get", "post"])
 def register():
     if request.method == "GET":
         return render_template("register.html")
@@ -37,9 +37,7 @@ def register():
         if password1 != password2:
             return render_template("error.html", message="Salasanat eivät ole samat.")
         role = request.form["role"]
-        if users.register(username, password1, role):
-            return redirect("/")
-        else:
+        if not  users.register(username, password1, role):
             return render_template("error.html", message="Rekisteröinti ei onnistunut, yritä uudelleen.")
-
+        return redirect("/")
 
