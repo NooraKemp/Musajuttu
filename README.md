@@ -24,10 +24,10 @@ Välipalautus 2:
 Ehdin aloittaa harjoitustyön tekemisen vasta tällä viikolla, joten sovelluksessa ei ole vielä montaa toimintoa.
 
 Tällä hetkellä toimivat ominaisuudet:
--Käyttäjä voi luoda tunnuksen sekä kirjautua sisään ja ulos.
--Käyttäjä voi lisätä viestiketjun ja poistaa luomansa ketjun.
--Ylläpitäjä voi lisätä ja poistaa keskustelualueita.
--Ylläpitäjä voi poistaa viestiketjun.
+- Käyttäjä voi luoda tunnuksen sekä kirjautua sisään ja ulos.
+- Käyttäjä voi lisätä viestiketjun ja poistaa luomansa ketjun.
+- Ylläpitäjä voi lisätä ja poistaa keskustelualueita.
+- Ylläpitäjä voi poistaa viestiketjun.
 
 Sovellusta voi testata täällä: https://musajuttu.herokuapp.com/
 
