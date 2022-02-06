@@ -1,0 +1,13 @@
+{% block content %}
+<p>{{ thread_name }}</p>
+Tänne tulee keskustelut.
+<p>
+Poista keskustelu:<br>
+<form action="/remove_thread" method="post">
+<input type="submit" value="Poista">
+<input type="hidden" name="id" value="{{ id }}">
+</form>
+
+<a href="/">Takaisin</a>
+
+{% endblock %}
