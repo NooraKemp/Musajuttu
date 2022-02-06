@@ -1,9 +1,9 @@
 {% block content %}
 
 <form action="/register" method="post">
-Käyttäjätunnus: <input type="text" name="username">
+Käyttäjätunnus: <input type="text" name="username" required minlenght="1" maxlength="25">
 <p>
-Salasana: <input type="password" name="password1">
+Salasana: <input type="password" name="password1" required minlenght="1">
 <p>
 Salasana uudestaan: <input type="password" name="password2">
 <p>

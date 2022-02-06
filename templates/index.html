@@ -4,10 +4,28 @@
 
 {% if session.user_id %}
 Kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
+<p>
+
+Keskustelualueet:
+<ul>
+{% for forum in forums %}
+<li><a href="/forum/{{ forum.id }}">{{ forum.forum_name }}</a>
+{% endfor %}
+</ul>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 <a href="/register">Rekisteröidy</a>
+<p>
 {% endif %}
 <p>
+
+{% if session.user_role == 2 %}
+Uusi keskustelualue:
+<form action="/add_forum" method="POST">
+    Aihe: <input type="text" name="forum_name" required minlenght="1" maxlength="30">
+    <input type="submit" value="Lisää">
+    <input type="hidden" name="csrf_token" value="{{ session.csfr_token }}">
+</form>
+{% endif %}
 
 {% endblock %}
