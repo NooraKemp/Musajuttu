@@ -8,18 +8,28 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä näkee sovelluksen etusivulla listan alueista sekä jokaisen alueen ketjujen ja viestien määrän ja viimeksi lähetetyn viestin ajankohdan. 
 - Käyttäjä voi luoda alueelle uuden ketjun antamalla ketjun otsikon ja aloitusviestin sisällön. 
 - Käyttäjä voi kirjoittaa uuden viestin olemassa olevaan ketjuun. 
-- Käyttäjä voi muokata luomansa ketjun otsikkoa sekä lähettämänsä viestin sisältöä. 
+- Käyttäjä voi muokata luomansa ketjun otsikkoa sekä lähettämänsä viestin sisältöä.
+- Käyttäjä voi poistaa luomansa ketjun. 
 - Käyttäjä voi myös poistaa kirjoittamansa viestin. 
 - Käyttäjä voi etsiä kaikki viestit, joiden osana on annettu sana. 
 - Ylläpitäjä voi poistaa viestiketjun sekä yksittäisiä viestejä.
 - Ylläpitäjä voi lisätä ja poistaa keskustelualueita. 
 - Ylläpitäjä voi luoda salaisen alueen ja määrittää, keillä käyttäjillä on pääsy alueelle.
  
-Sovelluksen ominaisuudet ovat suoraan kurssin esimerkistä. Muutin sen verran, että käyttäjä ei voi poistaa koko viestiketjua, sillä silloin poistuisivat myös muiden keskustelut aiheesta. Oman viestin poistamista mietin vielä eli olisiko parempi olla niin, että vain ylläpitäjä voi poistaa viestiketjuja sekä yksittäisiä viestejä.
+Sovelluksen ominaisuudet ovat suoraan kurssin esimerkistä ja saattavat muuttua vielä.
 
-Keskustelualueiden aiheita:
-- Yleinen
-- Suomalainen musiikki
-- Ulkomaalainen musiikki
-- Keikat
-- In English
+
+Välipalautus 2:
+
+Ehdin aloittaa harjoitustyön tekemisen vasta tällä viikolla, joten sovelluksessa ei ole vielä montaa toimintoa.
+
+Tällä hetkellä toimivat ominaisuudet:
+-Käyttäjä voi luoda tunnuksen sekä kirjautua sisään ja ulos.
+-Käyttäjä voi lisätä viestiketjun ja poistaa luomansa ketjun.
+-Ylläpitäjä voi lisätä ja poistaa keskustelualueita.
+-Ylläpitäjä voi poistaa viestiketjun.
+
+Sovellusta voi testata täällä: https://musajuttu.herokuapp.com/
+
+
+
