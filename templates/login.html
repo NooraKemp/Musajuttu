@@ -1,3 +1,4 @@
+{% extends "layout.html" %}
 {% block content %}
 
 <form action="/login" method="post">
@@ -7,6 +8,5 @@ Salasana: <input type="password" name="password">
 <p>
 <input type="submit" value="Kirjaudu sisään">
 </form>
-<a href="/register">Rekisteröidy</a>
 
 {% endblock %}

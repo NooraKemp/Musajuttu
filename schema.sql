@@ -23,7 +23,6 @@ CREATE TABLE threads (
 CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
     content TEXT,
-    visible INTEGER,
     user_id INTEGER REFERENCES users,
     thread_id INTEGER REFERENCES threads,
     send_at TIMESTAMP

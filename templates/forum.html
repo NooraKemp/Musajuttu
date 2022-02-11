@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="static/main.css">
+{% extends "layout.html" %}
 {% block content %}
 
 <h1>{{ forum_name }}</h1>
@@ -7,7 +9,7 @@ Uusi keskustelu:
 <p>Otsikko:<br> 
 <input type="text" name="thread_name" required minlength="1" maxlength="30"></p>
 <p>Viesti:<br> 
-<textarea name="content" rows="4" cols="40" required minlength="1" maxlength="200"></textarea></p>
+<textarea name="content" rows="4" cols="40" required minlength="1" maxlength="500"></textarea></p>
 <input type="hidden" name="forum_id" value="{{ id }}">
 <input type="submit" value="Lähetä">
 </form>
@@ -24,7 +26,5 @@ Poista keskustelualue:<br>
 <input type="hidden" name="id" value="{{ id }}">
 </form>
 {% endif %}
-
-<a href="/">Takaisin</a>
 
 {% endblock %}

@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
 {% block content %}
 
 <form action="/register" method="post">
@@ -10,7 +12,5 @@ Salasana uudestaan: <input type="password" name="password2">
 <input type="hidden" name="role" value=1>
 <input type="submit" value="Rekisteröidy">
 </form>
-<p>
-<a href="/login">Kirjaudu sisään</a>
 
 {% endblock %}

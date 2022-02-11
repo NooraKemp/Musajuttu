@@ -1,23 +1,18 @@
+<link rel="stylesheet" href="static/main.css">
+{% extends "layout.html" %}
 {% block content %}
 
-<h1>MUSAJUTTU</h1>
-
 {% if session.user_id %}
-Kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
-<p>
-
-Keskustelualueet:
-<ul>
 {% for forum in forums %}
-<li><a href="/forum/{{ forum.id }}">{{ forum.forum_name }}</a>
+<div class="container">
+    <div class="forum">
+        <div class="forum-title center">
+           <a href="/forum/{{ forum.id }}">{{ forum.forum_name }}</a>
+        </div>
+    </div>
+</div>
 {% endfor %}
-</ul>
-{% else %}
-<a href="/login">Kirjaudu sisään</a>
-<a href="/register">Rekisteröidy</a>
-<p>
 {% endif %}
-<p>
 
 {% if session.user_role == 2 %}
 Uusi keskustelualue:

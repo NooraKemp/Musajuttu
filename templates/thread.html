@@ -1,13 +1,37 @@
+<link rel="stylesheet" href="static/main.css">
+{% extends "layout.html" %}
+
 {% block content %}
-<p>{{ thread_name }}</p>
-Tänne tulee keskustelut.
+
+<p>Otsikko: {{ thread[0][0] }}</p>
+<p>Lähettäjä: {{ thread[0][3] }}</p>
+<p>Viesti: {{ thread[0][1] }}</p>
+
+{% for message in messages %}
+<p>Lähettäjä: {{ message[3]  }}</p>
+<p>Viesti: {{ message[1] }}</p>
+<p>Aika: {{ message[4] }}</p>
+Poista viesti:
+<form action="/remove_message" method="post">
+<input type="hidden" name="message_id" value="{{ message[0] }}">
+<input type="submit" value="poista">
+</form>
+{% endfor %}
 <p>
-Poista keskustelu:<br>
+
+<form action="/add_message" method="post">
+<p>Vastaa viestiin:<br>
+<textarea name="content" rows="4" cols="40" required minlength="1" maxlength="500"></textarea></p>
+<input type="hidden" name="thread_id" value="{{ id }}">
+<input type="submit" value="Lähetä">
+</form>
+
+
+
+Poista keskustelu:
 <form action="/remove_thread" method="post">
 <input type="submit" value="Poista">
 <input type="hidden" name="id" value="{{ id }}">
 </form>
-
-<a href="/">Takaisin</a>
 
 {% endblock %}
