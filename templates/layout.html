@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>MUSAJUTTU</title>
+
+<body>
+<header>
+    <h1>MUSAJUTTU</h1>
+    {% if session.user_id %}
+    Kirjautunut sisään nimellä: <b>{{ session.user_name }}</b>
+    {% endif %}
+    <div class="navbar">
+    <nav class="nav">
+        <ul class ="nav-list">
+            <li class="nav-item">
+                <a href="/">Etusivu</a>
+            </li>
+            {% if session.user_id %}
+            <li class="nav-item">
+                <a href="/logout">Kirjaudu ulos</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="/login">Kirjaudu sisään</a>
+            </li>
+            <li class="nav-item">
+                <a href="/register">Rekisteröidy</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    </div>
+</header>
+{% block content %}{% endblock %}
+</body>
+
