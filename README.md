@@ -17,7 +17,7 @@ Tällä hetkellä toimivat ominaisuudet:
 - Ylläpitäjä näkee "Ylläpijäjä toiminnot"-sivulla listan käyttäjistä.
 - Ylläpijäjä voi lisätä uuden ylläpitäjän ja poistaa käyttäjiä.
 
-Sovelluksen ulkoasu ei tällä hetkellä toimi puhelimella.
+Sovelluksen ulkoasu ei tällä hetkellä toimi mobiililaitteilla.
 
 Sovellusta voi testata täällä: https://musajuttu.herokuapp.com/
 
