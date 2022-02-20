@@ -8,16 +8,20 @@ def add_message(content, user_id, thread_id):
     db.session.execute(sql, {"content":content, "user_id":user_id, "thread_id":thread_id})
     db.session.commit()
 
+def get_message(message_id):
+    sql = "SELECT content FROM messages WHERE id=:id"
+    result= db.session.execute(sql, {"id":message_id})
+    return result.fetchone()[0] 
+
 def remove_message(message_id):
     sql = "DELETE FROM messages WHERE id=:id"
     db.session.execute(sql, {"id":message_id})
     db.session.commit()
 
-def edid_message(message_id, edited_content):
-    if users.user_id == get_writer(message_id):
-        sql = "UPDATE messages SET content:content WHERE id:id"
-        db.session.execute(sql, {"content":edited_content, "id":message_id})
-        db.session.commit()
+def edit_message(message_id, edited_content):
+    sql = "UPDATE messages SET content=:content WHERE id=:id"
+    db.session.execute(sql, {"content":edited_content, "id":message_id})
+    db.session.commit()
 
 def get_writer(message_id):
     sql = "SELECT user_id FROM messages WHERE id=:id"
@@ -28,3 +32,8 @@ def get_thread(message_id):
     sql = "SELECT thread_id FROM messages WHERE id=:id"
     result = db.session.execute(sql, {"id":message_id})
     return result.fetchone()[0]
+
+def search(keyword):
+    sql = "SELECT T.id, M.id, M.content, M.send_at, T.thread_name, M.user_id, U.username FROM threads T, messages M, users U WHERE LOWER(M.content) LIKE LOWER(:keyword) AND T.visible=1 AND T.id=M.thread_id AND M.user_id=U.id ORDER BY M.id DESC"
+    result = db.session.execute(sql, {"keyword":"%"+keyword+"%"})
+    return result.fetchall()

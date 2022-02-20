@@ -2,13 +2,13 @@
 {% extends "layout.html" %}
 {% block content %}
 
+{% if error: %}
+{{ message }}
+{% endif %}
 <form action="/register" method="post">
-Käyttäjätunnus: <input type="text" name="username" required minlenght="1" maxlength="25">
-<p>
-Salasana: <input type="password" name="password1" required minlenght="1">
-<p>
-Salasana uudestaan: <input type="password" name="password2">
-<p>
+<p>Käyttäjätunnus: <input type="text" name="username" maxlength="25"></p>
+<p>Salasana: <input type="password" name="password1"></p>
+<p>Salasana uudestaan: <input type="password" name="password2"></p>
 <input type="hidden" name="role" value=1>
 <input type="submit" value="Rekisteröidy">
 </form>

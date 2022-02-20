@@ -7,16 +7,16 @@
 <body>
 <header>
     <h1>MUSAJUTTU</h1>
-    {% if session.user_id %}
-    Kirjautunut sisään nimellä: <b>{{ session.user_name }}</b>
-    {% endif %}
-    <div class="navbar">
-    <nav class="nav">
+    <nav class="nav-bar">
         <ul class ="nav-list">
+            {% if session.user_id %}
             <li class="nav-item">
                 <a href="/">Etusivu</a>
             </li>
-            {% if session.user_id %}
+            {% block nav %}{% endblock %}
+            <li class="nav-item">
+            Kirjautunut sisään nimellä: <b>{{ session.user_name }}</b>
+            </li>
             <li class="nav-item">
                 <a href="/logout">Kirjaudu ulos</a>
             </li>
@@ -30,8 +30,26 @@
             {% endif %}
         </ul>
     </nav>
-    </div>
+    <div class="search-box">
+        <form action="/search" method="POST">
+        <select id="search_from" name="search_from">
+            <option value="from_all">Kaikista</opition>
+            <option value="from_threads">Aloituksista</opition>
+            <option value="from_messages">Viesteistä</option>
+        </select>
+        <input type="text" name="keyword" placeholder="Hakusana..">
+        <input type="submit" value="Etsi">
+        </form>
+</div>
 </header>
+{% if session.user_id %}
+Paikalla:
+{% for user in online %}
+{{ user.username }}
+{% endfor %}
+{% endif %}
+<div class="container">
 {% block content %}{% endblock %}
+</div>
 </body>
 

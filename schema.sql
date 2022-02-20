@@ -17,7 +17,8 @@ CREATE TABLE threads (
     content TEXT,
     visible INTEGER,
     forum_id INTEGER REFERENCES forums,
-    user_id INTEGER REFERENCES users
+    user_id INTEGER REFERENCES users,
+    created_at TIMESTAMP
 );
 
 CREATE TABLE messages (
@@ -26,4 +27,9 @@ CREATE TABLE messages (
     user_id INTEGER REFERENCES users,
     thread_id INTEGER REFERENCES threads,
     send_at TIMESTAMP
+);
+
+CREATE TABLE onlineUsers (
+    id SERIAL PRIMARY KEY,
+    username TEXT
 );

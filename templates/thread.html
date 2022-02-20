@@ -1,37 +1,113 @@
 <link rel="stylesheet" href="static/main.css">
 {% extends "layout.html" %}
 
+{% block nav %}
+<li class="nav-item">
+    <a href="/forum/{{ forum_id}}">{{ forum_name }}</a>
+</li>
+{% endblock %}
+
 {% block content %}
+{% if session.user_id %}
 
-<p>Otsikko: {{ thread[0][0] }}</p>
-<p>Lähettäjä: {{ thread[0][3] }}</p>
-<p>Viesti: {{ thread[0][1] }}</p>
+<div class="thread">
+    <div class="thread-title center">
+        <p>{{ thread[0][0] }}</p>
+    </div>
+    <div class="thread-row">
+        <div class="message-info">
+            <p>Lähettäjä: {{ thread[0][3] }}</p>
+            <p>Aika: {{ thread[0][4].strftime("%d.%m.%Y %H:%M") }}</p>
+            {% if session.user_role == 2 %}
+            <form action="/hide_thread" method="post">
+            <input type="submit" value="Piilota keskustelu">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/unhide_thread" method="post">
+            <input type="submit" value="Palauta keskustelu">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/remove_thread" method="post">
+            <input type="submit" value="Poista keskustelu">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/edit_thread" method="post">
+            <input type="submit" value="Muokkaa">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            {% else %}
+            {% if session.user_id == starter_id %}
+            <form action="/hide_thread" method="post">
+            <input type="submit" value="Piilota keskustelu">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">                    
+            </form>
+            <form action="/edit_thread" method="post">
+            <input type="submit" value="Muokkaa">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            {% endif %}
+            {% endif %}
+         </div>
+         <div class="content">
+             <p>{{ thread[0][1] }}</p>
+         </div>
+    </div>
+    {% for message in messages %}
+    <div class="thread-row">
+        <div class="message-info">
+            <p>Lähettäjä: {{ message[3]  }}</p>
+            <p>Aika: {{ message[4].strftime("%d.%m.%Y %H:%M") }}</p>
+            {% if session.user_role == 2 %}
+            <form action="/remove_message" method="post">
+            <input type="hidden" name="message_id" value="{{ message[0] }}">
+            <input type="submit" value="Poista viesti">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/edit_message" method="post">
+            <input type="submit" value="Muokkaa">
+            <input type="hidden" name="message_id" value="{{ message[0] }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            {% else %}
+            {% if session.user_id == message[2] %}
+            <form action="/remove_message" method="post">
+            <input type="hidden" name="message_id" value="{{ message[0] }}">
+            <input type="submit" value="Poista viesti">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/edit_message" method="post">
+            <input type="submit" value="Muokkaa">
+            <input type="hidden" name="message_id" value="{{ message[0] }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="content">
+            <p>{{ message[1] }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="thread_row">
+        <form action="/add_message" method="post">
+        <div class="message-info"> 
+            <p>Kirjoita viesti:</p>
+        </div>
+        <div class="content">
+            <textarea name="content" rows="4" cols="40" required minlength="1" maxlength="500"></textarea></p>
+            <input type="hidden" name="thread_id" value="{{ id }}">
+            <input type="submit" value="Lähetä">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </form>
+        </div>  
+    </div>         
+</div>
 
-{% for message in messages %}
-<p>Lähettäjä: {{ message[3]  }}</p>
-<p>Viesti: {{ message[1] }}</p>
-<p>Aika: {{ message[4] }}</p>
-Poista viesti:
-<form action="/remove_message" method="post">
-<input type="hidden" name="message_id" value="{{ message[0] }}">
-<input type="submit" value="poista">
-</form>
-{% endfor %}
-<p>
-
-<form action="/add_message" method="post">
-<p>Vastaa viestiin:<br>
-<textarea name="content" rows="4" cols="40" required minlength="1" maxlength="500"></textarea></p>
-<input type="hidden" name="thread_id" value="{{ id }}">
-<input type="submit" value="Lähetä">
-</form>
-
-
-
-Poista keskustelu:
-<form action="/remove_thread" method="post">
-<input type="submit" value="Poista">
-<input type="hidden" name="id" value="{{ id }}">
-</form>
-
+{% endif %}
 {% endblock %}

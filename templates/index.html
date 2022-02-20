@@ -3,24 +3,79 @@
 {% block content %}
 
 {% if session.user_id %}
-{% for forum in forums %}
-<div class="container">
-    <div class="forum">
-        <div class="forum-title center">
-           <a href="/forum/{{ forum.id }}">{{ forum.forum_name }}</a>
+
+<h1>Keskustelualueet</h1>
+
+<div class="index">
+    <div class="index-title-row">
+        <div>Aihe</div>
+        <div>Aloitukset</div>
+        <div>Viestit</div>
+    </div>
+    {% for forum in forums %}
+    <div class="index-row">
+        <a href="/forum/{{ forum.id }}">{{ forum.forum_name }}</a>
+        <div>{{ forum[2] }}</div>
+        <div>{{ forum[3] }}</div>
+        {%  if session.user_role == 2 %}
+        <div class="edit">
+            <form action="/hide_forum" method="post">
+            <input type="submit" value="Piilota">
+            <input type="hidden" name="id" value="{{ forum.id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/remove_forum" method="post">
+            <input type="submit" value="Poista">
+            <input type="hidden" name="id" value="{{ forum.id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %} 
+</div>
+
+<br>
+{% if session.user_role == 2 %}
+<h1>Piilotetut keskustelualueet:</h1>
+
+<div class="index">
+    <div class="index-title-row">
+        <div>Aihe</div>
+        <div>Aloitukset</div>
+        <div>Viestit</div>
+    </div>
+    {% for forum in hidden_forums %}
+    <div class="index-row">
+        <a href="/forum/{{ forum.id }}">{{ forum.forum_name }}</a>
+        <div>{{ forum[2] }}</div>
+        <div>{{ forum[3] }}</div>
+        <div class="edit">
+            <form action="/unhide_forum" method="post">
+            <input type="submit" value="Palauta">
+            <input type="hidden" name="id" value="{{ forum.id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/remove_forum" method="post">
+            <input type="submit" value="Poista">
+            <input type="hidden" name="id" value="{{ forum.id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
-{% endif %}
 
-{% if session.user_role == 2 %}
+<br>
 Uusi keskustelualue:
 <form action="/add_forum" method="POST">
-    Aihe: <input type="text" name="forum_name" required minlenght="1" maxlength="30">
-    <input type="submit" value="Lisää">
-    <input type="hidden" name="csrf_token" value="{{ session.csfr_token }}">
+Aihe: <input type="text" name="forum_name" required minlenght="1" maxlength="30">
+<input type="submit" value="Lisää">
+<input type="hidden" name="csrf_token" value="{{ session.csfr_token }}">
 </form>
+<br>
+<a href="/admin_functions">Ylläpitäjän toiminnot</a>
 {% endif %}
 
+{% endif %}
 {% endblock %}
