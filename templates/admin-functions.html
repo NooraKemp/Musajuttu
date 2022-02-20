@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="static/main.css">
+{% extends "layout.html" %}
+{% block content %}
+{% if session.user_id %}
+{% if session.user_role == 2 %}
+
+<p>Käyttäjät:</p>
+{% for user in users %}
+<p>Käyttäjätunnus: {{ user[1] }} Rooli: {{ user[2] }}</p>
+{% endfor %}
+<br>
+<p>Lisää admin:</p>
+<form action="/add_admin" method="post">
+<input type="text" name="username">
+<input type="submit" value="Lisää">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+<br>
+<p>Poista käyttäjä:</p>
+<form action="/remove_user" method="post">
+<input type="text" name="username">
+<input type="submit" value="Poista">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{% endif %}
+{% endif %}
+{% endblock %}

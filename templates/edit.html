@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="static/main.css">
+{% extends "layout.html" %}
+{% block content %}
+
+{% if session.user_id %}
+
+{% if thread_edit: %}
+<div class="thread_row">
+    <form action="/post_edited_thread" method="post">
+    <div class="message-info">
+        <p>Muokkaa:</p>
+    </div>
+    <div class="content">
+        <p>Otsikko:<br>
+        <input type="text" name="thread_name" value="{{ thread[0][0] }}" required minlength="1" maxlength="60"></p>
+        <p>Viesti:<br>
+        <textarea name="content" rows="4" cols="40" required minlength="1" maxlength="500">{{ thread[0][1] }}</textarea></p>
+        <input type="hidden" name="id" value="{{ thread_id }}">
+        <input type="submit" value="Lähetä">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+     </div>    
+     </form>
+</div>
+{% endif %}
+
+{% if message_edit: %}
+<div class="thread_row">
+    <form action="/post_edited_message" method="post">
+    <div class="message-info">
+        <p>Muokkaa:</p>
+    </div>
+    <div class="content">
+        <textarea name="content" rows="4" cols="40" required minlength="1" maxlength="500">{{ message }}</textarea></p>
+        <input type="hidden" name="message_id" value="{{ message_id }}">
+        <input type="submit" value="Lähetä">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </form>
+        </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}

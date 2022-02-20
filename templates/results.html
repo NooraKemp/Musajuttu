@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<p>Tulokset hakusanalla: <b>{{  keyword  }}</b></p>
+{% if error: %}
+{{ message }}
+{% endif %}
+<br>
+{% if search_threads: %}
+{% for thread in threads %}
+<div class="thread-row">
+        <div class="message-info">
+            <p>Keskustelu: <a href="/thread/{{ thread[0] }}">{{ thread[1] }}</a></p>
+            <p>Lähettäjä: {{ thread[5] }}</p>
+            <p>Aika: {{ thread[3].strftime("%d.%m.%Y %H:%M") }}</p>
+        </div>
+        <div class="content">
+            <p>{{ thread[2] }}</p>
+        </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if search_messages %}
+{% for message in messages %}
+<div class="thread-row">
+        <div class="message-info">
+            <p>Keskustelu: <a href="/thread/{{ message[0] }}">{{ message[4] }}</a></p>
+            <p>Lähettäjä: {{ message[6] }}</p>
+            <p>Aika: {{ message[3].strftime("%d.%m.%Y %H:%M") }}</p>
+        </div>
+        <div class="content">
+            <p>{{ message[2] }}</p>
+        </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+
