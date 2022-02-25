@@ -30,6 +30,7 @@
             {% endif %}
         </ul>
     </nav>
+    {% if session.user_id %}
     <div class="search-box">
         <form action="/search" method="POST">
         <select id="search_from" name="search_from">
@@ -40,7 +41,8 @@
         <input type="text" name="keyword" placeholder="Hakusana..">
         <input type="submit" value="Etsi">
         </form>
-</div>
+    </div>
+    {% endif %}
 </header>
 {% if session.user_id %}
 Paikalla:

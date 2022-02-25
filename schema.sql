@@ -26,7 +26,7 @@ CREATE TABLE messages (
     content TEXT,
     user_id INTEGER REFERENCES users,
     thread_id INTEGER REFERENCES threads,
-    send_at TIMESTAMP
+    sent_at TIMESTAMP
 );
 
 CREATE TABLE onlineUsers (

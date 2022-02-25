@@ -9,7 +9,7 @@ def add_thread(thread_name, content, user_id, forum_id):
     return result
 
 def get_thread(thread_id):
-    sql = "SELECT T.thread_name, T.content, T.user_id, U.username, T.created_at FROM threads T, users U WHERE T.id=:id AND T.user_id=U.id"
+    sql = "SELECT T.thread_name, T.content, T.user_id, U.username, T.created_at, T.visible FROM threads T INNER JOIN users U ON T.user_id=U.id WHERE T.id=:id"
     result = db.session.execute(sql, {"id":thread_id})
     return result.fetchall() 
 
@@ -47,12 +47,12 @@ def get_forum(thread_id):
     return result.fetchone()[0]
 
 def get_thread_messages(thread_id):
-   sql = "SELECT M.id, M.content, M.user_id, U.username, M.send_at FROM messages M, users U WHERE M.thread_id=:thread_id AND M.user_id=U.id ORDER BY M.id"
+   sql = "SELECT M.id, M.content, M.user_id, U.username, M.sent_at FROM messages M INNER JOIN users U ON M.user_id=U.id WHERE M.thread_id=:thread_id ORDER BY M.id"
    result = db.session.execute(sql, {"thread_id":thread_id})
    return result.fetchall() 
 
 def search(keyword):
-    sql = """SELECT T.id, T.thread_name, T.content, T.created_at, T.user_id, U.username FROM threads T, users U WHERE (LOWER(T.thread_name) LIKE LOWER(:keyword) 
-             OR LOWER(T.content) LIKE LOWER(:keyword)) AND visible=1 AND T.user_id=U.id ORDER BY T.id DESC"""
+    sql = """SELECT T.id, T.thread_name, T.content, T.created_at, T.user_id, U.username FROM threads T INNER JOIN users U ON T.user_id=U.id 
+             WHERE (LOWER(T.thread_name) LIKE LOWER(:keyword) OR LOWER(T.content) LIKE LOWER(:keyword)) AND T.visible=1 ORDER BY T.id DESC"""
     result = db.session.execute(sql, {"keyword":"%"+keyword+"%"})
     return result.fetchall()

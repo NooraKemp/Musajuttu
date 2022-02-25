@@ -7,17 +7,21 @@
 
 <div class="forum">
     <div class="forum-title-row">
-        <div>Vietiketjut</div>
+        <div>Viestiketjut</div>
         <div>Lähettäjä</div>
         <div>Vastauksia</div>
-        <div>Aloitettu</div>
+        <div>Viimeisin</div>
     </div>
     {% for thread in threads %}
     <div class="forum-row">
         <a href="/thread/{{ thread.id }}">{{ thread[1] }}</a>
         <div>{{ thread[4] }}</div>
         <div>{{ thread[5] }}</div>
+        {% if thread[5] == 0 %}
         <div>{{ thread[2].strftime("%d.%m.%Y %H:%M") }}</div>
+        {% else %}
+        <div>{{ thread[6].strftime("%d.%m.%Y %H:%M") }}</div>
+        {% endif %}
     </div>
     {% endfor %}
     <div class="thread_row">
@@ -39,18 +43,24 @@
 </div>
 
 {% if session.user_role == 2 %}
-<h1>Piilotetut keskustelut:</h1>
+<h1>Piilotetut keskustelut</h1>
 <div class="forum">
     <div class="forum-title-row">
         <div>Vietiketjut</div>
         <div>Lähettäjä</div>
-        <div>Aloitettu</div>
+        <div>Vastauksia</div>
+        <div>Viimeisin</div>
     </div>
     {% for thread in hidden_threads %}
     <div class="forum-row">
         <a href="/thread/{{ thread.id }}">{{ thread[1] }}</a>
         <div>{{ thread[4] }}</div>
+        <div>{{ thread[5] }}</div>
+        {% if thread[5] == 0 %}
         <div>{{ thread[2].strftime("%d.%m.%Y %H:%M") }}</div>
+        {% else %}
+        <div>{{ thread[6].strftime("%d.%m.%Y %H:%M") }}</div>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

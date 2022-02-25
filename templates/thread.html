@@ -19,16 +19,20 @@
             <p>Lähettäjä: {{ thread[0][3] }}</p>
             <p>Aika: {{ thread[0][4].strftime("%d.%m.%Y %H:%M") }}</p>
             {% if session.user_role == 2 %}
+            {% if thread[0][5] == 1 %}
             <form action="/hide_thread" method="post">
             <input type="submit" value="Piilota keskustelu">
             <input type="hidden" name="id" value="{{ id }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             </form>
+            {% endif %}
+            {% if thread[0][5] == 0 %}
             <form action="/unhide_thread" method="post">
             <input type="submit" value="Palauta keskustelu">
             <input type="hidden" name="id" value="{{ id }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             </form>
+            {% endif %}
             <form action="/remove_thread" method="post">
             <input type="submit" value="Poista keskustelu">
             <input type="hidden" name="id" value="{{ id }}">

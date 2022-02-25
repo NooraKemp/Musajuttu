@@ -34,6 +34,8 @@ def get_thread(message_id):
     return result.fetchone()[0]
 
 def search(keyword):
-    sql = "SELECT T.id, M.id, M.content, M.send_at, T.thread_name, M.user_id, U.username FROM threads T, messages M, users U WHERE LOWER(M.content) LIKE LOWER(:keyword) AND T.visible=1 AND T.id=M.thread_id AND M.user_id=U.id ORDER BY M.id DESC"
+    sql = """SELECT T.id, M.id, M.content, M.sent_at, T.thread_name, M.user_id, U.username FROM threads T INNER JOIN messages M ON T.id=M.thread_id 
+             INNER JOIN users U ON M.user_id=U.id WHERE LOWER(M.content) LIKE LOWER(:keyword) AND T.visible=1 ORDER BY M.id DESC"""
     result = db.session.execute(sql, {"keyword":"%"+keyword+"%"})
     return result.fetchall()
+
