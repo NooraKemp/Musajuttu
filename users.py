@@ -15,7 +15,9 @@ def login(username, password):
     session["user_name"] = username
     session["user_role"] = user[2]
     session["csrf_token"] = os.urandom(16).hex()
-    sql = """INSERT INTO onlineUsers (username)
+    online = is_online(username);
+    if online == 0:
+        sql = """INSERT INTO onlineUsers (username)
              VALUES (:username)"""
     db.session.execute(sql, {"username":username})
     db.session.commit()
@@ -47,6 +49,11 @@ def get_users():
 def get_users_online():
      sql = "SELECT username FROM onlineUsers"
      return db.session.execute(sql).fetchall()
+
+def is_online(username):
+    sql = "SELECT COUNT(*) FROM onlineUsers WHERE username=:username"
+    result= db.session.execute(sql, {"username":username})
+    return result.fetchone()[0]
 
 def user_id():
     return session.get("user_id",0)
