@@ -18,7 +18,5 @@ Sovelluksen ominaisuudet:
 
 Sovellusta voi testata osoitteessa: https://musajuttu.herokuapp.com/
 
-Ylläpitäjän toimintoja voi testata tunnuksilla:
-Käyttäjätunnus: Admin Salasana: testAdmin
 
 
