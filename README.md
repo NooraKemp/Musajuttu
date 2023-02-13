@@ -16,7 +16,4 @@ Sovelluksen ominaisuudet:
 - Ylläpitäjä näkee "Ylläpijän toiminnot"-sivulla listan käyttäjistä.
 - Ylläpitäjä voi lisätä uuden ylläpitäjän ja poistaa käyttäjiä.
 
-Sovellusta voi testata osoitteessa: https://musajuttu.herokuapp.com/
-
-
-
+Sovellus oli aiemmin käytettävissä Herokussa, mutta ei ole enää saatavilla palvelun muututtua maksulliseksi.
